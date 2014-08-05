@@ -11,7 +11,7 @@ def calculate(sentence)
 
     #if first letter contains a number
     if ((/[0-9]/ =~ word.split("")[0]) == 0)
-      operands << word.to_i
+      operands << word.to_f
       prev_is_operand = true
     end
 
@@ -23,9 +23,18 @@ def calculate(sentence)
     answer = operands[0] - operands[1]
   elsif(operators[0] == 'times')
     answer = operands[0] * operands[1]
+  elsif(operators[0] == 'divided')
+    answer = operands[0] / operands[1]
   end
-  
+
+  #all math done in floats, then strip off unneeded decimal places, converts to string.
+  answer = ("%g" % ("%f" % answer))
+
+  if(answer.include?("."))
+    answer = answer.to_f
+  else
+    answer = answer.to_i
+  end
   answer
 end
 
- puts calculate('What is 5 times 3?')
