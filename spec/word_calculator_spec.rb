@@ -10,4 +10,8 @@ describe('calculate') do
   it('subtracts two integers given in a sentence.') do
     calculate('What is 5 minus 3?').should(eq(2))
   end
+
+  it('subtracts two integers given in a sentence.') do
+    calculate('What is 5 times 3?').should(eq(15))
+  end
 end

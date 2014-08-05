@@ -9,8 +9,8 @@ def calculate(sentence)
       prev_is_operand = false
     end
 
+    #if first letter contains a number
     if ((/[0-9]/ =~ word.split("")[0]) == 0)
-      #if first letter contains a number
       operands << word.to_i
       prev_is_operand = true
     end
@@ -21,9 +21,11 @@ def calculate(sentence)
     answer = operands[0] + operands[1]
   elsif(operators[0] == 'minus')
     answer = operands[0] - operands[1]
+  elsif(operators[0] == 'times')
+    answer = operands[0] * operands[1]
   end
   
   answer
 end
 
-# puts calculate('What is 5 minus 3?')
+ puts calculate('What is 5 times 3?')
