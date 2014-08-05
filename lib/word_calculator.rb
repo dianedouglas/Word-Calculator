@@ -25,6 +25,8 @@ def calculate(sentence)
     answer = operands[0] * operands[1]
   elsif(operators[0] == 'divided')
     answer = operands[0] / operands[1]
+  elsif(operators[0] == 'to')
+    answer = operands[0] ** operands[1]
   end
 
   #all math done in floats, then strip off unneeded decimal places, converts to string.

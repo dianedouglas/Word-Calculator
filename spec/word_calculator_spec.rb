@@ -20,6 +20,6 @@ describe('calculate') do
   end
 
   it('subtracts two integers given in a sentence.') do
-    calculate('What is 5.5 times 3?').should(eq(16.5))
+    calculate('What is 2 to the 3rd power?').should(eq(8))
   end
 end
