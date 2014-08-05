@@ -18,4 +18,8 @@ describe('calculate') do
   it('subtracts two integers given in a sentence.') do
     calculate('What is 5 divided by 2?').should(eq(2.5))
   end
+
+  it('subtracts two integers given in a sentence.') do
+    calculate('What is 5.5 times 3?').should(eq(16.5))
+  end
 end
