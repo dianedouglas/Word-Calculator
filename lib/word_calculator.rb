@@ -21,7 +21,7 @@ def calculate(sentence)
   is_first_operation = true
   answer = 0.0
   left_operand = 0.0
-  # 
+
   operators.each do |operator|
 
     if is_first_operation == true
@@ -38,7 +38,13 @@ def calculate(sentence)
         answer = left_operand * operands[i + 1]
       elsif operator == 'divided'
         answer = left_operand / operands[i + 1]  
-      end     
+      end    
+    elsif (operator == 'plus' || operator == 'minus')
+      if operator == 'plus'
+        answer = left_operand + operands[i + 1]
+      elsif operator == 'minus'
+        answer = left_operand - operands[i + 1]  
+      end    
     end
 
     i += 1
