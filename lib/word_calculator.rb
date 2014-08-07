@@ -17,44 +17,28 @@ def calculate(sentence)
 
   end
 
-  # for(int i = 0; i < operators.length; i += 1){
-
   i = 0
   is_first_operation = true
   answer = 0.0
+  left_operand = 0.0
+  # 
   operators.each do |operator|
 
-    # if operator == 'plus'
-    #   answer = operands[i] + operands[i + 1]
-    # elsif(operator == 'minus')
-    #   answer = operands[i] - operands[i + 1]
-    # elsif(operator == 'times')
-    #   answer = operands[i] * operands[i + 1]
-    # elsif(operator == 'divided')
-    #   answer = operands[i] / operands[i + 1]
-    # els
+    if is_first_operation == true
+      is_first_operation = false
+      left_operand = operands[i]
+    else
+      left_operand = answer
+    end
+    
     if(operator == 'to')
-      if is_first_operation == true
-        is_first_operation = false
-        answer = operands[i] ** operands[i + 1]
-      else
-        answer = answer ** operands[i + 1]
-      end
+      answer = left_operand ** operands[i + 1]
     elsif(operator == 'times' || operator == 'divided')
-      if is_first_operation == true
-        is_first_operation = false
-        if operator == 'times'
-          answer = operands[i] * operands[i + 1]
-        elsif operator == 'divided'
-          answer = operands[i] / operands[i + 1]       
-        end   
-      else
-        if operator == 'times'
-          answer *= operands[i + 1]
-        elsif operator == 'divided'
-          answer /= operands[i + 1]
-        end           
-      end
+      if operator == 'times'
+        answer = left_operand * operands[i + 1]
+      elsif operator == 'divided'
+        answer = left_operand / operands[i + 1]  
+      end     
     end
 
     i += 1
