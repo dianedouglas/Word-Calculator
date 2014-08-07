@@ -17,16 +17,47 @@ def calculate(sentence)
 
   end
 
-  if operators[0] == 'plus'
-    answer = operands[0] + operands[1]
-  elsif(operators[0] == 'minus')
-    answer = operands[0] - operands[1]
-  elsif(operators[0] == 'times')
-    answer = operands[0] * operands[1]
-  elsif(operators[0] == 'divided')
-    answer = operands[0] / operands[1]
-  elsif(operators[0] == 'to')
-    answer = operands[0] ** operands[1]
+  # for(int i = 0; i < operators.length; i += 1){
+
+  i = 0
+  is_first_operation = true
+  answer = 0.0
+  operators.each do |operator|
+
+    # if operator == 'plus'
+    #   answer = operands[i] + operands[i + 1]
+    # elsif(operator == 'minus')
+    #   answer = operands[i] - operands[i + 1]
+    # elsif(operator == 'times')
+    #   answer = operands[i] * operands[i + 1]
+    # elsif(operator == 'divided')
+    #   answer = operands[i] / operands[i + 1]
+    # els
+    if(operator == 'to')
+      if is_first_operation == true
+        is_first_operation = false
+        answer = operands[i] ** operands[i + 1]
+      else
+        answer = answer ** operands[i + 1]
+      end
+    elsif(operator == 'times' || operator == 'divided')
+      if is_first_operation == true
+        is_first_operation = false
+        if operator == 'times'
+          answer = operands[i] * operands[i + 1]
+        elsif operator == 'divided'
+          answer = operands[i] / operands[i + 1]       
+        end   
+      else
+        if operator == 'times'
+          answer *= operands[i + 1]
+        elsif operator == 'divided'
+          answer /= operands[i + 1]
+        end           
+      end
+    end
+
+    i += 1
   end
 
   #all math done in floats, then strip off unneeded decimal places, converts to string.
