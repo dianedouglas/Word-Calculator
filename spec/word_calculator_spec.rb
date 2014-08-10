@@ -33,6 +33,14 @@ describe('calculate') do
     expect(calculate('What is 2 to the power of 3 times 4')).to eq 32    
   end
 
+  it('calculates a sentence involving negative numbers.') do 
+    expect(calculate('What is minus 2 minus 3?')).to eq(-5)
+  end
+
+  it('calculates a sentence involving negative numbers.') do 
+    expect(calculate('What is minus 2 plus negative 3?')).to eq(-5)
+  end
+
 end
 
 describe('calculate_sentences') do

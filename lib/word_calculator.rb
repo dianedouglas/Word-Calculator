@@ -33,8 +33,10 @@ def calculate(sentence)
   operands = []
   operators = []
   prev_is_operand = false
+  index_operand = 0
+  sentence = sentence.split(" ")
 
-  sentence.split(" ").each do |word|
+  sentence.each do |word|
 
     if (prev_is_operand)
       operators << word
@@ -43,10 +45,18 @@ def calculate(sentence)
 
     #if first letter contains a number
     if ((/[0-9]/ =~ word.split("")[0]) == 0)
-      operands << word.to_f
+      word = word.to_f
+      if sentence[index_operand - 1] == "minus" || sentence[index_operand - 1] == "negative"
+        word = word * -1
+      end
+      if operators[operators.length - 1] == "divided"
+        word = 1 / word
+      end
+      operands << word
       prev_is_operand = true
     end
 
+    index_operand += 1
   end
 
   index_operator = 0
@@ -65,17 +75,9 @@ def calculate(sentence)
     if(operator == 'to')
       answer = left_operand ** operands[index_operator + 1]
     elsif(operator == 'times' || operator == 'divided')
-      if operator == 'times'
         answer = left_operand * operands[index_operator + 1]
-      elsif operator == 'divided'
-        answer = left_operand / operands[index_operator + 1]  
-      end    
     elsif (operator == 'plus' || operator == 'minus')
-      if operator == 'plus'
-        answer = left_operand + operands[index_operator + 1]
-      elsif operator == 'minus'
-        answer = left_operand - operands[index_operator + 1]  
-      end    
+      answer = left_operand + operands[index_operator + 1]
     end
 
     index_operator += 1
