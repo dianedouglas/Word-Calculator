@@ -77,4 +77,24 @@ describe('calculate_sentences') do
     expect(calculate_sentences('What is 2 to the power of 3?')).to eq 8 
   end
 
+  it('calculates a sentence involving negative numbers.') do 
+    expect(calculate('What is minus 2 plus negative 3?')).to eq(-5)
+  end
+
+  it('calculates a sentence involving negative numbers.') do 
+    expect(calculate('What is minus 2 minus minus 3?')).to eq 1
+  end
+
+  it('filters out erroneous input which contains less than two numbers.') do 
+    expect(calculate_sentences('What?')).to eq ['Please include at least one number.']
+  end
+
+  it('filters out erroneous input which is not a question.') do 
+    expect(calculate_sentences('This is a 5.')).to eq ['Please ask a question.']
+  end
+
+  it('filters out erroneous input which is not a question and includes no numbers.') do 
+    expect(calculate_sentences('This is a not an anything.')).to eq ['Please ask a question.', 'Please include at least one number.']
+  end
+
 end

@@ -1,32 +1,43 @@
 def calculate_sentences(sentences)
+  #first check input.
+  errors = []
+  if !sentences.include? ("?")
+    errors << 'Please ask a question.'
+  end
+  if (sentences =~ /[0-9]/) == nil
+    errors << 'Please include at least one number.'
+  end 
 
-  results = []
-  word_index = 1
+  if errors.length > 0
+    errors
+  else #if no errors in input, calculate each sentence.
 
-  while sentences.include? ("?")
-    words = sentences.split(" ")
+    results = []
+    word_index = 1
 
-    words.each do |word| 
+    while sentences.include? ("?")
+      words = sentences.split(" ")
 
-      if word.include? "?"
-        current_sentence = words.slice!(0, word_index).join(" ")
-        sentences = words.join(" ")
-        results << calculate(current_sentence)
-        word_index = 1
-        break
+      words.each do |word| 
+        if word.include? "?"
+          current_sentence = words.slice!(0, word_index).join(" ")
+          sentences = words.join(" ")
+          results << calculate(current_sentence)
+          word_index = 1
+          break
+        end
+        word_index += 1
       end
-      word_index += 1
 
     end
 
-  end
+    if results.length == 1
+      results[0] 
+    else
+      results
+    end
 
-  if results.length == 1
-    results[0] 
-  else
-    results
   end
-
 end
 
 def calculate(sentence)
