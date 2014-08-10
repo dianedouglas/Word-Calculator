@@ -41,4 +41,28 @@ describe('calculate_sentences') do
     calculate_sentences('What is 5 plus 3? What is 8 plus 3?').should(eq([8, 11]))    
   end
 
+  it('adds two integers given in a sentence.') do
+    calculate_sentences('What is 5 plus 3?').should(eq(8))
+  end
+
+  it('subtracts two integers given in a sentence.') do
+    calculate_sentences('What is 5 minus 3?').should(eq(2))
+  end
+
+  it('subtracts two integers given in a sentence.') do
+    calculate_sentences('What is 5 times 3?').should(eq(15))
+  end
+
+  it('subtracts two integers given in a sentence.') do
+    calculate_sentences('What is 5 divided by 2?').should(eq(2.5))
+  end
+
+  it('raises the first integer to the second integer given in a sentence.') do
+    calculate_sentences('What is 2 to the 3rd power?').should(eq(8))
+  end
+
+  it('raises the first integer to the second integer when worded differently in a sentence.') do
+    calculate_sentences('What is 2 to the power of 3?').should(eq(8))
+  end
+
 end

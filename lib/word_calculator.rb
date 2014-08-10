@@ -20,8 +20,11 @@ def calculate_sentences(sentences)
       word_index += 1
     end
   end
-
-  results
+  if results.length == 1
+    results[0]
+  else
+    results
+  end
 end
 
 def calculate(sentence)
