@@ -71,34 +71,40 @@ def calculate(sentence)
   is_first_operation = true
   answer = 0.0
 
-  operators.each do |operator|
+  if operands.length <= 1 || operators.length < 1
+    answer = 'There has been an error with your input. Please make sure to use at least one number.'
+  else 
 
-    if is_first_operation == true
-      is_first_operation = false
-      left_operand = operands[0]
+    operators.each do |operator|
+
+      if is_first_operation == true
+        is_first_operation = false
+        left_operand = operands[0]
+      else
+        left_operand = answer
+      end
+      
+      if(operator == 'to')
+        answer = left_operand ** operands[index_operator + 1]
+      elsif(operator == 'times' || operator == 'divided')
+          answer = left_operand * operands[index_operator + 1]
+      elsif (operator == 'plus' || operator == 'minus')
+        answer = left_operand + operands[index_operator + 1]
+      end
+
+      index_operator += 1
+    end
+
+    #all math done in floats, then strip off unneeded decimal places, converts to string.
+    answer = ("%g" % ("%f" % answer))
+
+    if(answer.include?("."))
+      answer = answer.to_f
     else
-      left_operand = answer
+      answer = answer.to_i
     end
-    
-    if(operator == 'to')
-      answer = left_operand ** operands[index_operator + 1]
-    elsif(operator == 'times' || operator == 'divided')
-        answer = left_operand * operands[index_operator + 1]
-    elsif (operator == 'plus' || operator == 'minus')
-      answer = left_operand + operands[index_operator + 1]
-    end
-
-    index_operator += 1
   end
 
-  #all math done in floats, then strip off unneeded decimal places, converts to string.
-  answer = ("%g" % ("%f" % answer))
-
-  if(answer.include?("."))
-    answer = answer.to_f
-  else
-    answer = answer.to_i
-  end
   answer
 end
 
@@ -114,7 +120,7 @@ def check_for_errors(sentences)
     errors << 'Please ask a question.'
   end
   if (sentences =~ /[0-9]/) == nil
-    errors << 'Please include at least one number.'
+    errors << 'Please include at least two numbers.'
   end
   if (sentences.include? ("square")) || (sentences.include? ("cube"))
     errors << 'When using powers, please phrase your question in the standard form of X to the power of Y or X to the Yth power.'
@@ -126,6 +132,6 @@ def check_for_errors(sentences)
       break
     end
   end
-  
+
   errors
 end

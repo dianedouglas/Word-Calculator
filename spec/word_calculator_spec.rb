@@ -83,8 +83,8 @@ describe('calculate_sentences') do
     expect(calculate('What is minus 2 minus minus 3?')).to eq 1
   end
 
-  it('filters out erroneous input which contains less than two numbers.') do 
-    expect(calculate_sentences('What?')).to eq ['Please include at least one number.']
+  it('filters out erroneous input which contains no numbers.') do 
+    expect(calculate_sentences('What?')).to eq ['Please include at least two numbers.']
   end
 
   it('filters out erroneous input which is not a question.') do 
@@ -92,7 +92,11 @@ describe('calculate_sentences') do
   end
 
   it('filters out erroneous input which is not a question and includes no numbers.') do 
-    expect(calculate_sentences('This is a not an anything.')).to eq ['Please ask a question.', 'Please include at least one number.']
+    expect(calculate_sentences('This is a not an anything.')).to eq ['Please ask a question.', 'Please include at least two numbers.']
+  end
+
+  it('filters out erroneous input which meets all other requirements but only has one number.') do 
+    expect(calculate_sentences('What is 5?')).to eq 'There has been an error with your input. Please make sure to use at least one number.'
   end
 
 end
@@ -104,7 +108,7 @@ describe('check_for_errors') do
   end
 
   it('filters out erroneous input which is not a question and includes no numbers.') do 
-    expect(check_for_errors('This is a not an anything.')).to eq ['Please ask a question.', 'Please include at least one number.']
+    expect(check_for_errors('This is a not an anything.')).to eq ['Please ask a question.', 'Please include at least two numbers.']
   end
 
   it('filters out erroneous shorthand input using "squared" or "cubed."') do 
