@@ -41,6 +41,10 @@ describe('calculate') do
     expect(calculate('What is minus 2 plus negative 3?')).to eq(-5)
   end
 
+  it('calculates a sentence involving negative numbers.') do 
+    expect(calculate('What is minus 2 minus minus 3?')).to eq 1
+  end
+
 end
 
 describe('calculate_sentences') do

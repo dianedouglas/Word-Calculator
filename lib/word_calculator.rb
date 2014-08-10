@@ -48,6 +48,9 @@ def calculate(sentence)
       word = word.to_f
       if sentence[index_operand - 1] == "minus" || sentence[index_operand - 1] == "negative"
         word = word * -1
+        if sentence[index_operand - 2] == "minus" 
+          word = word * -1
+        end
       end
       if operators[operators.length - 1] == "divided"
         word = 1 / word
