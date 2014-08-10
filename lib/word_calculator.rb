@@ -72,7 +72,7 @@ def calculate(sentence)
   answer = 0.0
 
   if operands.length <= 1 || operators.length < 1
-    answer = 'There has been an error with your input. Please make sure to use at least one number.'
+    answer = 'There has been an error with your input. Please make sure to use at least two numbers.'
   else 
 
     operators.each do |operator|
@@ -111,10 +111,14 @@ end
 def check_for_errors(sentences)
   errors = []
   number_words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "twenty", "thirty", "fifty"]
+  symbols = ["-", "*", "/", "+"]
   sentences = sentences.downcase
 
-  if sentences.include? ("-")
-    errors << 'I like words! Please use minus or negative instead of a dash.'
+  symbols.each do |symbol|
+    if sentences.include? symbol
+      errors << 'I like words! Please use minus or negative instead of a dash, or "times" instead of "*".'
+      break
+    end
   end
   if !sentences.include? ("?")
     errors << 'Please ask a question.'

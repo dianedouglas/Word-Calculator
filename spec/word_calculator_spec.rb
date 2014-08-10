@@ -96,7 +96,7 @@ describe('calculate_sentences') do
   end
 
   it('filters out erroneous input which meets all other requirements but only has one number.') do 
-    expect(calculate_sentences('What is 5?')).to eq 'There has been an error with your input. Please make sure to use at least one number.'
+    expect(calculate_sentences('What is 5?')).to eq 'There has been an error with your input. Please make sure to use at least two numbers.'
   end
 
 end
@@ -116,7 +116,11 @@ describe('check_for_errors') do
   end
 
   it('filters out erroneous input using "-" instead of minus or negative.') do 
-    expect(check_for_errors('What is -2 plus 3?')).to eq ['I like words! Please use minus or negative instead of a dash.']
+    expect(check_for_errors('What is -2 plus 3?')).to eq ['I like words! Please use minus or negative instead of a dash, or "times" instead of "*".']
+  end
+
+  it('filters out erroneous input using symbols like "*" instead of times.') do 
+    expect(check_for_errors('What is 2 * 3?')).to eq ['I like words! Please use minus or negative instead of a dash, or "times" instead of "*".']
   end
 
   it('filters out erroneous input using "two" instead of 2.') do 
