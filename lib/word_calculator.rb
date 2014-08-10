@@ -1,30 +1,32 @@
-require 'pry'
-
 def calculate_sentences(sentences)
 
   results = []
-  word_index = 0
+  word_index = 1
 
   while sentences.include? ("?")
     words = sentences.split(" ")
+
     words.each do |word| 
 
       if word.include? "?"
-        current_sentence = words.slice!(0, word_index+1)
+        current_sentence = words.slice!(0, word_index).join(" ")
         sentences = words.join(" ")
-        current_sentence = current_sentence.join(" ")
         results << calculate(current_sentence)
-        word_index = 0
+        word_index = 1
         break
       end
       word_index += 1
+
     end
+
   end
+
   if results.length == 1
-    results[0]
+    results[0] 
   else
     results
   end
+
 end
 
 def calculate(sentence)
@@ -33,6 +35,7 @@ def calculate(sentence)
   prev_is_operand = false
 
   sentence.split(" ").each do |word|
+
     if (prev_is_operand)
       operators << word
       prev_is_operand = false
@@ -46,37 +49,36 @@ def calculate(sentence)
 
   end
 
-  i = 0
+  index_operator = 0
   is_first_operation = true
   answer = 0.0
-  left_operand = 0.0
 
   operators.each do |operator|
 
     if is_first_operation == true
       is_first_operation = false
-      left_operand = operands[i]
+      left_operand = operands[0]
     else
       left_operand = answer
     end
     
     if(operator == 'to')
-      answer = left_operand ** operands[i + 1]
+      answer = left_operand ** operands[index_operator + 1]
     elsif(operator == 'times' || operator == 'divided')
       if operator == 'times'
-        answer = left_operand * operands[i + 1]
+        answer = left_operand * operands[index_operator + 1]
       elsif operator == 'divided'
-        answer = left_operand / operands[i + 1]  
+        answer = left_operand / operands[index_operator + 1]  
       end    
     elsif (operator == 'plus' || operator == 'minus')
       if operator == 'plus'
-        answer = left_operand + operands[i + 1]
+        answer = left_operand + operands[index_operator + 1]
       elsif operator == 'minus'
-        answer = left_operand - operands[i + 1]  
+        answer = left_operand - operands[index_operator + 1]  
       end    
     end
 
-    i += 1
+    index_operator += 1
   end
 
   #all math done in floats, then strip off unneeded decimal places, converts to string.
