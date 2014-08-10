@@ -1,3 +1,4 @@
+require 'pry'
 
 def calculate_sentences(sentences)
   errors = check_for_errors(sentences)
@@ -103,6 +104,9 @@ end
 
 def check_for_errors(sentences)
   errors = []
+  if sentences.include? ("-")
+    errors << 'I like words! Please use minus or negative instead of a dash.'
+  end
   if !sentences.include? ("?")
     errors << 'Please ask a question.'
   end
