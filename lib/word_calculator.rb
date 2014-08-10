@@ -108,5 +108,8 @@ def check_for_errors(sentences)
   if (sentences =~ /[0-9]/) == nil
     errors << 'Please include at least one number.'
   end 
+  if (sentences.include? ("square")) || (sentences.include? ("cube"))
+    errors << 'When using powers, please phrase your question in the standard form of X to the power of Y or X to the Yth power.'
+  end
   errors
 end

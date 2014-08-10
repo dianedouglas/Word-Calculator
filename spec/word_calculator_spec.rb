@@ -108,4 +108,8 @@ describe('check_for_errors') do
   it('filters out erroneous input which is not a question and includes no numbers.') do 
     expect(check_for_errors('This is a not an anything.')).to eq ['Please ask a question.', 'Please include at least one number.']
   end
+
+  it('filters out erroneous shorthand input using "squared" or "cubed."') do 
+    expect(check_for_errors('What is 2 squared?')).to eq ['When using powers, please phrase your question in the standard form of X to the power of Y or X to the Yth power.']
+  end
 end
