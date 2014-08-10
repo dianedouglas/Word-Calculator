@@ -1,5 +1,3 @@
-require 'pry'
-
 def calculate_sentences(sentences)
   errors = check_for_errors(sentences)
   if errors.length > 0
