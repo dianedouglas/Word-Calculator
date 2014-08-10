@@ -98,3 +98,14 @@ describe('calculate_sentences') do
   end
 
 end
+
+describe('check_for_errors') do 
+
+  it('filters out erroneous input which is not a question.') do 
+    expect(check_for_errors('This is a 5.')).to eq ['Please ask a question.']
+  end
+
+  it('filters out erroneous input which is not a question and includes no numbers.') do 
+    expect(check_for_errors('This is a not an anything.')).to eq ['Please ask a question.', 'Please include at least one number.']
+  end
+end

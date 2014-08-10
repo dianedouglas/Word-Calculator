@@ -1,16 +1,8 @@
 def calculate_sentences(sentences)
-  #first check input.
-  errors = []
-  if !sentences.include? ("?")
-    errors << 'Please ask a question.'
-  end
-  if (sentences =~ /[0-9]/) == nil
-    errors << 'Please include at least one number.'
-  end 
-
+  errors = check_for_errors(sentences)
   if errors.length > 0
     errors
-  else #if no errors in input, calculate each sentence.
+  else 
 
     results = []
     word_index = 1
@@ -108,3 +100,13 @@ def calculate(sentence)
   answer
 end
 
+def check_for_errors(sentences)
+  errors = []
+  if !sentences.include? ("?")
+    errors << 'Please ask a question.'
+  end
+  if (sentences =~ /[0-9]/) == nil
+    errors << 'Please include at least one number.'
+  end 
+  errors
+end
