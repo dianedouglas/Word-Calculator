@@ -115,4 +115,8 @@ describe('check_for_errors') do
     expect(check_for_errors('What is -2 plus 3?')).to eq ['I like words! Please use minus or negative instead of a dash.']
   end
 
+  it('filters out erroneous input using "two" instead of 2.') do 
+    expect(check_for_errors('What is Two plus 3?')).to eq ["You don't need to write out your numbers. Please just enter the digits inside your question."]
+  end
+
 end

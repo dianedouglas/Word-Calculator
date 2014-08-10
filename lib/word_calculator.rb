@@ -104,6 +104,9 @@ end
 
 def check_for_errors(sentences)
   errors = []
+  number_words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "twenty", "thirty", "fifty"]
+  sentences = sentences.downcase
+
   if sentences.include? ("-")
     errors << 'I like words! Please use minus or negative instead of a dash.'
   end
@@ -116,5 +119,13 @@ def check_for_errors(sentences)
   if (sentences.include? ("square")) || (sentences.include? ("cube"))
     errors << 'When using powers, please phrase your question in the standard form of X to the power of Y or X to the Yth power.'
   end
+
+  number_words.each do |number_word|
+    if sentences.include? number_word
+      errors << "You don't need to write out your numbers. Please just enter the digits inside your question."
+      break
+    end
+  end
+  
   errors
 end
