@@ -1,8 +1,9 @@
+
 def calculate_sentences(sentences)
   errors = check_for_errors(sentences)
   if errors.length > 0
     errors
-  else 
+  else
 
     results = []
     word_index = 1
@@ -10,7 +11,7 @@ def calculate_sentences(sentences)
     while sentences.include? ("?")
       words = sentences.split(" ")
 
-      words.each do |word| 
+      words.each do |word|
         if word.include? "?"
           current_sentence = words.slice!(0, word_index).join(" ")
           sentences = words.join(" ")
@@ -24,7 +25,7 @@ def calculate_sentences(sentences)
     end
 
     if results.length == 1
-      results[0] 
+      results[0]
     else
       results
     end
@@ -47,7 +48,7 @@ def calculate(sentence)
     end
 
     #if first letter contains a number
-    if ((/[0-9]/ =~ word.split("")[0]) == 0)
+    if ((word.split("")[0] =~ /[0-9]/) != nil)
       word = word.to_f
       if sentence[index_operand - 1] == "minus" || sentence[index_operand - 1] == "negative"
         word = word * -1
@@ -107,7 +108,7 @@ def check_for_errors(sentences)
   end
   if (sentences =~ /[0-9]/) == nil
     errors << 'Please include at least one number.'
-  end 
+  end
   if (sentences.include? ("square")) || (sentences.include? ("cube"))
     errors << 'When using powers, please phrase your question in the standard form of X to the power of Y or X to the Yth power.'
   end
